@@ -13,7 +13,7 @@ import com.estudo.course.entities.Order;
 import com.estudo.course.services.OrderService;
 
 @RestController
-@RequestMapping(value = "/orders")  //Controlador rest que responde no caminho users
+@RequestMapping(value = "/orders")  //Controlador rest que responde no caminho orders
 public class OrderResource {
 
 	@Autowired //Dependência feita pelo spring

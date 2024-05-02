@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.estudo.course.entities.Category;
-import com.estudo.course.services.CategoryService;
+import com.estudo.course.entities.Product;
+import com.estudo.course.services.ProductService;
 
 @RestController
-@RequestMapping(value = "/categories")  //Controlador rest que responde no caminho categories
-public class CategoryResource {
+@RequestMapping(value = "/products")  //Controlador rest que responde no caminho products
+public class ProductResource {
 
 	@Autowired //Dependência feita pelo spring
-	private CategoryService service;
+	private ProductService service;
 	
 	@GetMapping //get http
-	public ResponseEntity<List<Category>> findAll() { //Procurando todos os usuarios
-		List<Category> list = service.findAll();
+	public ResponseEntity<List<Product>> findAll() { //Procurando todos os usuarios
+		List<Product> list = service.findAll();
 		return ResponseEntity.ok().body(list); //.ok para voltar resposta com sucesso, .body para retornar corpo da resposta instanciado
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Category> findyById(@PathVariable Long id) { //Procurando usuarios somente por id
-		Category obj = service.findById(id);
+	public ResponseEntity<Product> findyById(@PathVariable Long id) { //Procurando usuarios somente por id
+		Product obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
