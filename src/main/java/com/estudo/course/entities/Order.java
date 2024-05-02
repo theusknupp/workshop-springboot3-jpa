@@ -2,7 +2,9 @@ package com.estudo.course.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.estudo.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -13,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,6 +36,11 @@ public class Order implements Serializable {
 	@ManyToOne // Relação de muitos pra um com cliente
 	@JoinColumn(name = "client_id")
 	private User client;
+	
+	@OneToMany(mappedBy = "id.order")
+	private Set<OrderItem> items = new HashSet<>();
+	// É usado SET em vez de LIST, pois o SET representa um conjunto, isso garante que um produto não irá ter mais de um item de Ordem por vez
+	// o HashSet é usado pois o SET é uma interface e não pode ser instanciado.
 
 	public Order() {
 
@@ -78,6 +86,10 @@ public class Order implements Serializable {
 
 	public void setClient(User client) {
 		this.client = client;
+	}
+	
+	public Set<OrderItem> getItems() {
+		return items;
 	}
 
 	@Override
